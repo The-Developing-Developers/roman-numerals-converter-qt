@@ -50,7 +50,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>insert roman number</string>
+     <string>Type roman numeral...</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="decimalNumberLineEdit">
@@ -63,7 +63,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>insert decimal number</string>
+     <string>Type decimal number...</string>
     </property>
    </widget>
    <widget class="QLabel" name="romToDecResultLabel">
@@ -99,7 +99,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

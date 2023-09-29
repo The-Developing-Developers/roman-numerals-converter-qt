@@ -10,18 +10,18 @@ QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+   MainWindow(QWidget *parent = nullptr);
+  ~MainWindow(void);
 
 private:
-    Ui::MainWindow* ui;
-    RomanNumeralsConverter* converter;
+  Ui::MainWindow*         ui;
+  RomanNumeralsConverter* m_converter;
 
 public slots:
-  void ConvertDecimalToRomanSlot();
-  void ConvertRomanToDecimalSlot();
+  void ConvertDecimalToRomanSlot(void);
+  void ConvertRomanToDecimalSlot(void);
 };
 #endif // MAINWINDOW_H

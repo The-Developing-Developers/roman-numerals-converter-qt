@@ -1,5 +1,5 @@
 /**
- * @file Roman_Numerals_Converter.hpp
+ * @file romannumeralsconverter.h
  *
  * @brief Converts from decimal to roman numeral and vice-versa.
  **/
@@ -12,54 +12,44 @@
 #include <QObject>
 #include <QtDebug>
 
-
 /**
- * @brief Converts a decimal number (a size_t) to a roman numeral (an QString) and
- * vice-versa.
- * 
- * Instantiate this class and use its methods.
- *
- * The converter only supports numbers from 1 up to 3999.
+ * @brief Converts a decimal number (a size_t) to a roman numeral (an QString) and vice-versa.
+ * \n Instantiate this class and use its methods.
+ * \n The converter only supports numbers from 1 up to 3999.
  **/
-class RomanNumeralsConverter : public QObject
+class RomanNumeralsConverter
 {
-  Q_OBJECT
-
 private:
 
   /**
-   * @brief Used to properly identify individual decimal places both during
-   * Roman-to-Decimal and Decimal-to-Roman conversion
+   * @brief Used to properly identify individual decimal places both during Roman-to-Decimal and
+   * Decimal-to-Roman conversion
    **/
   enum class PowersOfTen
   {
-    THOUSANDS,
-    HUNDREDS,
-    TENS,
     UNITS,
+    TENS,
+    HUNDREDS,
+    THOUSANDS,
 
     HOW_MANY
   };
 
-  /* Map individual decimal places to their roman equivalent. Used to build
-  the output string in the decimal-to-roman converter. */
+  static constexpr size_t LowerLimitForConversion = (size_t)0;
+  static constexpr size_t UpperLimitForConversion = (size_t)4000;
 
-  static const QMap<const size_t, QString> m_ThouToRom_Map;
-  static const QMap<const size_t, QString> m_HundToRom_Map;
-  static const QMap<const size_t, QString> m_TensToRom_Map;
-  static const QMap<const size_t, QString> m_UnitToRom_Map;
+  static const QVector<QPair<const size_t, const QString>> m_DecToRom_Map;
 
-  /* Map individual roman numberals to their decimal values equivalent. Used
-  to generate the output number in the roman-to-decimal converter. */
-
-  static const QMap<const QString, size_t> m_RomToDec_Map;
+  size_t  ValidateTempStr_Pvt    (const QString&)  const;
+  QString GetSubstrFromNumber_Pvt(size_t*, size_t) const;
 
 public:
-  explicit RomanNumeralsConverter(QObject *parent = nullptr);
-  ~RomanNumeralsConverter(void) = default;
 
-  QString ConvertDecimalToRoman(size_t) const;
-  size_t  ConvertRomanToDecimal(const QString&) const;
+  explicit RomanNumeralsConverter(void) = default;
+          ~RomanNumeralsConverter(void) = default;
+
+  QString ConvertDecimalToRoman(size_t)  const;
+  size_t  ConvertRomanToDecimal(QString) const;
 
 };
 
