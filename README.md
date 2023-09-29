@@ -8,6 +8,7 @@
   - [Version 2.0.0](#version-200)
   - [Version 2.1.0](#version-210)
   - [Version 2.2.0](#version-220)
+  - [Version 2.3.0](#version-230)
 
 
 # Description
@@ -41,4 +42,8 @@ The conversion algorithm has been improved with respect to version 2.0.0, replac
 ## Version 2.2.0
 
 Adds the possibility to start the conversion by pressing the `ENTER` key.
+
+## Version 2.3.0
+
+Identical to 2.2.0, but with tabs. This is just an experiment in order to learn about tabs.
 
