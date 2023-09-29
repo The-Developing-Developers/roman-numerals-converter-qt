@@ -2,13 +2,23 @@
 #include "./ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
-  : QMainWindow (parent)
-  , ui          (new Ui::MainWindow)
-  , m_converter (new RomanNumeralsConverter)
+  : QMainWindow       (parent)
+  , ui                (new Ui::MainWindow)
+  , m_converter       (new RomanNumeralsConverter)
 {
   ui->setupUi(this);
+
+  m_dialog          = new QDialog         (ui->centralwidget);
+  m_dialogButtonBox = new QDialogButtonBox(m_dialog);
+
+  m_dialog->setWindowTitle("Conversion error");
+
+  m_dialogButtonBox->setGeometry(QRect(20, 20, 160, 30));
+  m_dialogButtonBox->setStandardButtons(QDialogButtonBox::Cancel | QDialogButtonBox::Ok);
+
   connect(ui->convertDecToRomButton, &QPushButton::clicked,     this, &MainWindow::ConvertDecimalToRomanSlot);
   connect(ui->convertRomToDecButton, &QPushButton::clicked,     this, &MainWindow::ConvertRomanToDecimalSlot);
+  connect(ui->errorButton,           &QPushButton::clicked,     this, &MainWindow::ErrorSlot);
   connect(ui->decimalNumberLineEdit, &QLineEdit::returnPressed, this, &MainWindow::ConvertDecimalToRomanSlot);
   connect(ui->romanNumberLineEdit,   &QLineEdit::returnPressed, this, &MainWindow::ConvertRomanToDecimalSlot);
 }
@@ -41,4 +51,9 @@ void MainWindow::ConvertDecimalToRomanSlot(void)
   QString convertedRomanNumeral   (m_converter->ConvertDecimalToRoman(decimalNumberTypedByUser));
 
   ui->decToRomResultLabel->setText(convertedRomanNumeral);
+}
+
+void MainWindow::ErrorSlot(void)
+{
+  m_dialog->open();
 }

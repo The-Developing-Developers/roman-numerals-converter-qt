@@ -9,6 +9,7 @@
   - [Version 2.1.0](#version-210)
   - [Version 2.2.0](#version-220)
   - [Version 2.3.0](#version-230)
+  - [Version 2.4.0](#version-240)
 
 
 # Description
@@ -47,3 +48,8 @@ Adds the possibility to start the conversion by pressing the `ENTER` key.
 
 Identical to 2.2.0, but with tabs. This is just an experiment in order to learn about tabs.
 
+## Version 2.4.0
+
+Evolves from 2.3.0 (without tabs).
+
+Primitive version of *modal* pop-up (that is, blocking the execution of the program) with an error message in case the user enters invalid input. We still need to implement the message, the error recognition logic (using the return values of the conversion methods), and the connection between the `QDialogButtonBox` signals and error handling slots. See [here](https://doc.qt.io/qt-6/qdialogbuttonbox.html#details).
