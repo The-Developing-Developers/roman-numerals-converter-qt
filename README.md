@@ -5,6 +5,7 @@
 - [Versions](#versions)
   - [Version 1.0.0](#version-100)
   - [Version 1.1.0](#version-110)
+  - [Version 2.0.0](#version-200)
 
 
 # Description
@@ -26,3 +27,8 @@ This is the simplest form of integration between our existing project and Qt.
 ## Version 1.1.0
 
 In this version the result is presented in the GUI via `QLabel`. Errors are still presented on the command line.
+
+## Version 2.0.0
+
+In this version the backend no longer uses the C++ standard library, but only Qt types.
+

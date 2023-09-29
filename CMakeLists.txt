@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(RomanNumeralsConverter VERSION 1.1.0 LANGUAGES CXX)
+project(RomanNumeralsConverter VERSION 2.0.0 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)

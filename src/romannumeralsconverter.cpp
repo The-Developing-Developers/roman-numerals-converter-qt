@@ -9,27 +9,27 @@ RomanNumeralsConverter::RomanNumeralsConverter(QObject *parent)
 /* Le mappe non possono essere constexpr, quindi occorre dichiararle static
 const e definirle fuori dalla classe */
 
-const std::map<const size_t, const std::string> RomanNumeralsConverter::m_ThouToRom_Map =
+const QMap<const size_t, QString> RomanNumeralsConverter::m_ThouToRom_Map =
 {
   {1, "M"}, {2, "MM"}, {3, "MMM"}
 };
 
-const std::map<const size_t, const std::string> RomanNumeralsConverter::m_HundToRom_Map =
+const QMap<const size_t, QString> RomanNumeralsConverter::m_HundToRom_Map =
 {
   {1, "C"}, {2, "CC"}, {3, "CCC"}, {4, "CD"}, {5, "D"}, {6, "DC"}, {7, "DCC"}, {8, "DCCC"}, {9, "CM"}
 };
 
-const std::map<const size_t, const std::string> RomanNumeralsConverter::m_TensToRom_Map =
+const QMap<const size_t, QString> RomanNumeralsConverter::m_TensToRom_Map =
 {
   {1, "X"}, {2, "XX"}, {3, "XXX"}, {4, "XL"}, {5, "L"}, {6, "LX"}, {7, "LXX"}, {8, "LXXX"}, {9, "XC"}
 };
 
-const std::map<const size_t, const std::string> RomanNumeralsConverter::m_UnitToRom_Map =
+const QMap<const size_t, QString> RomanNumeralsConverter::m_UnitToRom_Map =
 {
   {1, "I"}, {2, "II"}, {3, "III"}, {4, "IV"}, {5, "V"}, {6, "VI"}, {7, "VII"}, {8, "VIII"}, {9, "IX"}
 };
 
-const std::map<const std::string, const size_t> RomanNumeralsConverter::m_RomToDec_Map =
+const QMap<const QString, size_t> RomanNumeralsConverter::m_RomToDec_Map =
 {
   {"I", 1},    {"II", 2},    {"III", 3},   {"IV", 4},   {"V", 5},   {"VI", 6},   {"VII", 7},   {"VIII", 8},   {"IX", 9},
   {"X", 10},   {"XX", 20},   {"XXX", 30},  {"XL", 40},  {"L", 50},  {"LX", 60},  {"LXX", 70},  {"LXXX", 80},  {"XC", 90},
@@ -42,18 +42,16 @@ const std::map<const std::string, const size_t> RomanNumeralsConverter::m_RomToD
  * @brief Convert a decimal number to its roman equivalent
  *
  * @param DecimalNumeral The size_t decimal value to be converted
- * @return std::string
+ * @return QString
  **/
-std::string RomanNumeralsConverter::ConvertDecimalToRoman(size_t DecimalNumeral) const
+QString RomanNumeralsConverter::ConvertDecimalToRoman(size_t DecimalNumeral) const
 {
-  std::string Result;
+  QString Result;
 
   if (DecimalNumeral == 0 || DecimalNumeral > 3999)
   {
     /* Number not supported */
-#ifndef NDEBUG
-    std::cerr << "\nError: number not supported\n";
-#endif // NDEBUG
+    qDebug() << "\nError: number not supported\n";
   }
   else
   {
@@ -82,25 +80,25 @@ std::string RomanNumeralsConverter::ConvertDecimalToRoman(size_t DecimalNumeral)
     if (DecimalPlaces[ThouIndex] != 0)
     {
       // Result += m_ThouToRom_Map[DecimalPlaces[ThouIndex]]; // L'operatore indicizzazione potrebbe modificare la mappa, pertanto è in contrasto con il modificatore "const" della funzione
-      Result += m_ThouToRom_Map.find(DecimalPlaces[ThouIndex])->second; // Occorre invece utilizzare il metodo "find".
+      Result += m_ThouToRom_Map.find(DecimalPlaces[ThouIndex]).value(); // Occorre invece utilizzare il metodo "find".
     }
     else {;} // Empty place: nothing to convert
 
     if (DecimalPlaces[HundIndex] != 0)
     {
-      Result += m_HundToRom_Map.find(DecimalPlaces[HundIndex])->second;
+      Result += m_HundToRom_Map.find(DecimalPlaces[HundIndex]).value();
     }
     else {;} // Empty place: nothing to convert
 
     if (DecimalPlaces[TensIndex] != 0)
     {
-      Result += m_TensToRom_Map.find(DecimalPlaces[TensIndex])->second;
+      Result += m_TensToRom_Map.find(DecimalPlaces[TensIndex]).value();
     }
     else {;} // Empty place: nothing to convert
 
     if (DecimalPlaces[UnitIndex] != 0)
     {
-      Result += m_UnitToRom_Map.find(DecimalPlaces[UnitIndex])->second;
+      Result += m_UnitToRom_Map.find(DecimalPlaces[UnitIndex]).value();
     }
     else {;} // Empty place: nothing to convert
   }
@@ -112,28 +110,20 @@ std::string RomanNumeralsConverter::ConvertDecimalToRoman(size_t DecimalNumeral)
 /**
  * @brief Convert a roman numeral to its decimal equivalent
  *
- * @param RomanNumeral The std::string to be converted
+ * @param RomanNumeral The QString to be converted
  * @return size_t
  **/
-size_t RomanNumeralsConverter::ConvertRomanToDecimal(const std::string& RomanNumeral) const
+size_t RomanNumeralsConverter::ConvertRomanToDecimal(const QString& RomanNumeral) const
 {
   size_t      Result = 0;
-  std::string AllowedLetters("CDILMVX");
+  QString AllowedLetters("CDILMVX");
 
-  std::string tempRomanNumeral = RomanNumeral;
+  QString tempRomanNumeral = RomanNumeral.toUpper();
 
-  for (auto& Char : tempRomanNumeral)
-  {
-    Char = static_cast<char>(std::toupper(static_cast<char>(Char)));
-  }
-
-  if (tempRomanNumeral.find_first_not_of(AllowedLetters) != std::string::npos)
+  if (tempRomanNumeral.toStdString().find_first_not_of(AllowedLetters.toStdString()) != std::string::npos)
   {
     /* Illegal letter detected */
-  #ifndef NDEBUG
-    // throw std::runtime_error("\nIllegal letter\n"); // Debug
-    std::cerr << "\n\"" << tempRomanNumeral << "\": illegal letter detected\n";
-  #endif // NDEBUG
+    qDebug() << "\n\"" << tempRomanNumeral << "\": illegal letter detected\n";
 
     Result = 0;
   }
@@ -144,8 +134,8 @@ size_t RomanNumeralsConverter::ConvertRomanToDecimal(const std::string& RomanNum
     PowersOfTen PreviousPower = PowersOfTen::THOUSANDS;
     PowersOfTen  CurrentPower = PowersOfTen::THOUSANDS;
     bool hasJustStarted       = true;
-    char PreviousLetter       = '\0';
-    std::string TempStr; // Used to convert a group of letters representing thousands, hundreds, tens or units
+    QChar PreviousLetter       = '\0';
+    QString TempStr; // Used to convert a group of letters representing thousands, hundreds, tens or units
 
     auto Iter = tempRomanNumeral.cbegin();
 
@@ -200,16 +190,13 @@ size_t RomanNumeralsConverter::ConvertRomanToDecimal(const std::string& RomanNum
 
         if (Found != m_RomToDec_Map.cend())
         {
-          Result += Found->second;
+          Result += Found.value();
           TempStr.clear();
           TempStr.push_back(*Iter);
         }
         else
         {
-#ifndef NDEBUG
-          // throw std::runtime_error("\nNot found in map");
-          std::cerr << "\n\"" << TempStr << "\": error computing powers of ten (CurrentPower > PreviousPower)";
-#endif // NDEBUG
+          qDebug() << "\n\"" << TempStr << "\": error computing powers of ten (CurrentPower > PreviousPower)";
 
           Result = 0;
           break;
@@ -225,10 +212,7 @@ size_t RomanNumeralsConverter::ConvertRomanToDecimal(const std::string& RomanNum
       {
         /* Powers of ten must be sequential from thousands to units */
 
-#ifndef NDEBUG
-        // throw std::runtime_error("\nErrore potenza");
-        std::cerr << "\n\"" << TempStr << "\": error computing powers of ten (CurrentPower < PreviousPower)";
-#endif // NDEBUG
+        qDebug() << "\n\"" << TempStr << "\": error computing powers of ten (CurrentPower < PreviousPower)";
 
         Result = 0;
         break;
@@ -242,14 +226,11 @@ size_t RomanNumeralsConverter::ConvertRomanToDecimal(const std::string& RomanNum
 
         if (Found != m_RomToDec_Map.cend())
         {
-          Result += Found->second;
+          Result += Found.value();
         }
         else
         {
-#ifndef NDEBUG
-          // throw std::runtime_error("\nNot found in map");
-          std::cerr << "\n\"" << TempStr << "\": not found in map";
-#endif // NDEBUG
+          qDebug() << "\n\"" << TempStr << "\": not found in map";
 
           Result = 0;
           break;

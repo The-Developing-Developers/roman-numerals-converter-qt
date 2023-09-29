@@ -19,12 +19,12 @@ MainWindow::~MainWindow()
 void MainWindow::ConvertDecimalToRomanSlot()
 {
     auto result = converter->ConvertDecimalToRoman(ui->decimalNumberLineEdit->text().toULongLong());
-    ui->decToRomResultLabel->setText(result.c_str());
+    ui->decToRomResultLabel->setText(result);
 }
 
 void MainWindow::ConvertRomanToDecimalSlot()
 {
-    auto res = converter->ConvertRomanToDecimal(ui->romanNumberLineEdit->text().toStdString());
+    auto res = converter->ConvertRomanToDecimal(ui->romanNumberLineEdit->text());
     QString result = QString::number(res);
     ui->romToDecResultLabel->setText(result);
 }

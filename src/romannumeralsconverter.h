@@ -7,17 +7,14 @@
 #ifndef ROMANNUMERALSCONVERTER_H
 #define ROMANNUMERALSCONVERTER_H
 
-#ifndef NDEBUG
-  #include <iostream>
-#endif // NDEBUG
-
-#include <string>
-#include <map>
+#include <QString>
+#include <QMap>
 #include <QObject>
+#include <QtDebug>
 
 
 /**
- * @brief Converts a decimal number (a size_t) to a roman numeral (an std::string) and
+ * @brief Converts a decimal number (a size_t) to a roman numeral (an QString) and
  * vice-versa.
  * 
  * Instantiate this class and use its methods.
@@ -47,22 +44,22 @@ private:
   /* Map individual decimal places to their roman equivalent. Used to build
   the output string in the decimal-to-roman converter. */
 
-  static const std::map<const size_t, const std::string> m_ThouToRom_Map;
-  static const std::map<const size_t, const std::string> m_HundToRom_Map;
-  static const std::map<const size_t, const std::string> m_TensToRom_Map;
-  static const std::map<const size_t, const std::string> m_UnitToRom_Map;
+  static const QMap<const size_t, QString> m_ThouToRom_Map;
+  static const QMap<const size_t, QString> m_HundToRom_Map;
+  static const QMap<const size_t, QString> m_TensToRom_Map;
+  static const QMap<const size_t, QString> m_UnitToRom_Map;
 
   /* Map individual roman numberals to their decimal values equivalent. Used
   to generate the output number in the roman-to-decimal converter. */
 
-  static const std::map<const std::string, const size_t> m_RomToDec_Map;
+  static const QMap<const QString, size_t> m_RomToDec_Map;
 
 public:
   explicit RomanNumeralsConverter(QObject *parent = nullptr);
   ~RomanNumeralsConverter(void) = default;
 
-  std::string ConvertDecimalToRoman(size_t) const;
-  size_t      ConvertRomanToDecimal(const std::string&) const;
+  QString ConvertDecimalToRoman(size_t) const;
+  size_t  ConvertRomanToDecimal(const QString&) const;
 
 };
 
