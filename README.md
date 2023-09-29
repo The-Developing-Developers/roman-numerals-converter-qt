@@ -10,6 +10,7 @@
   - [Version 2.2.0](#version-220)
   - [Version 2.3.0](#version-230)
   - [Version 2.4.0](#version-240)
+  - [Version 2.5.0](#version-250)
 
 
 # Description
@@ -53,3 +54,18 @@ Identical to 2.2.0, but with tabs. This is just an experiment in order to learn 
 Evolves from 2.3.0 (without tabs).
 
 Primitive version of *modal* pop-up (that is, blocking the execution of the program) with an error message in case the user enters invalid input. We still need to implement the message, the error recognition logic (using the return values of the conversion methods), and the connection between the `QDialogButtonBox` signals and error handling slots. See [here](https://doc.qt.io/qt-6/qdialogbuttonbox.html#details).
+
+## Version 2.5.0
+
+Evolution of version 2.4.0.
+  - `QDialogButtonBox` has been linked to the `connect` function, and it now works as expected.
+  - Implemented error recognition logic by adding `conversionError` signal, raised when a conversion error is detected.
+  - Disabled debug print via `QT_NO_DEBUG_OUTPUT` macro in `CMakeLists.txt`.
+  - Used `open` instead of `exec` as suggested [here](https://doc.qt.io/qt-6/qdialog.html#exec).
+
+Information about modal pop-up windows:
+- https://doc.qt.io/qt-6/qdialog.html#modal-dialogs
+
+Documentation about the roles of `QDialogButtonBox`:
+- https://doc.qt.io/qt-6/qdialogbuttonbox.html#ButtonRole-enum
+- https://doc.qt.io/qt-6/qdialogbuttonbox.html#StandardButton-enum

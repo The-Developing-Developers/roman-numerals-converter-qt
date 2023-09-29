@@ -7,27 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>430</width>
-    <height>220</height>
+    <height>180</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Roman Numerals Converter</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="errorButton">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>130</y>
-      <width>90</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Invoke Error</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>

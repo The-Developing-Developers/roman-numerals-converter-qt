@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QDialog>
+#include <QLabel>
 #include <QDialogButtonBox>
 #include "romannumeralsconverter.h"
 
@@ -20,13 +21,17 @@ public:
 
 private:
   Ui::MainWindow*         ui;
-  QDialog*                m_dialog;
-  QDialogButtonBox*       m_dialogButtonBox;
+  QDialog*                m_errorDialog;
+  QLabel*                 m_errorMessageLabel;
+  QDialogButtonBox*       m_errorCloseButtonBox;
   RomanNumeralsConverter* m_converter;
 
 public slots:
-  void ConvertDecimalToRomanSlot(void);
-  void ConvertRomanToDecimalSlot(void);
-  void ErrorSlot(void);
+  void convertDecimalToRomanSlot(void);
+  void convertRomanToDecimalSlot(void);
+  void errorSlot(void);
+
+signals:
+  void conversionError(void);
 };
 #endif // MAINWINDOW_H
