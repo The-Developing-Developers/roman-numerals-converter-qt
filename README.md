@@ -4,6 +4,7 @@
 - [Description](#description)
 - [Versions](#versions)
   - [Version 1.0.0](#version-100)
+  - [Version 1.1.0](#version-110)
 
 
 # Description
@@ -21,3 +22,7 @@ This program exists in multiple consecutive releases, to illustrate its evolutio
 In this version the backend uses only the C++ standard library. The reason for this (instead of using the analogous Qt types) is that we imported an existing project that was originally command-line only. As a consequence, the output is command-line only in this initial version as well.
 
 This is the simplest form of integration between our existing project and Qt.
+
+## Version 1.1.0
+
+In this version the result is presented in the GUI via `QLabel`. Errors are still presented on the command line.

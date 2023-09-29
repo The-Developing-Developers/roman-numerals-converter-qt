@@ -13,6 +13,7 @@
 
 #include <string>
 #include <map>
+#include <QObject>
 
 
 /**
@@ -23,8 +24,10 @@
  *
  * The converter only supports numbers from 1 up to 3999.
  **/
-class RomanNumeralsConverter
+class RomanNumeralsConverter : public QObject
 {
+  Q_OBJECT
+
 private:
 
   /**
@@ -55,11 +58,12 @@ private:
   static const std::map<const std::string, const size_t> m_RomToDec_Map;
 
 public:
-  explicit RomanNumeralsConverter() = default;
+  explicit RomanNumeralsConverter(QObject *parent = nullptr);
   ~RomanNumeralsConverter(void) = default;
 
   std::string ConvertDecimalToRoman(size_t) const;
   size_t      ConvertRomanToDecimal(const std::string&) const;
+
 };
 
 #endif // ROMANNUMERALSCONVERTER_H

@@ -1,5 +1,10 @@
 #include "romannumeralsconverter.h"
 
+RomanNumeralsConverter::RomanNumeralsConverter(QObject *parent)
+    : QObject{parent}
+{
+
+}
 
 /* Le mappe non possono essere constexpr, quindi occorre dichiararle static
 const e definirle fuori dalla classe */

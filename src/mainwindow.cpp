@@ -18,10 +18,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::ConvertDecimalToRomanSlot()
 {
-    std::cout << "Converted Number: " << converter->ConvertDecimalToRoman(ui->decimalNumberLineEdit->text().toULongLong()) << std::endl;
+    auto result = converter->ConvertDecimalToRoman(ui->decimalNumberLineEdit->text().toULongLong());
+    ui->decToRomResultLabel->setText(result.c_str());
 }
 
 void MainWindow::ConvertRomanToDecimalSlot()
 {
-    std::cout << "Converted Number: " << converter->ConvertRomanToDecimal(ui->romanNumberLineEdit->text().toStdString()) << std::endl;
+    auto res = converter->ConvertRomanToDecimal(ui->romanNumberLineEdit->text().toStdString());
+    QString result = QString::number(res);
+    ui->romToDecResultLabel->setText(result);
 }
