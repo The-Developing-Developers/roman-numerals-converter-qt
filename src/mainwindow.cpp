@@ -7,8 +7,10 @@ MainWindow::MainWindow(QWidget *parent)
   , m_converter (new RomanNumeralsConverter)
 {
   ui->setupUi(this);
-  connect(ui->convertDecToRomButton, &QPushButton::clicked, this, &MainWindow::ConvertDecimalToRomanSlot);
-  connect(ui->convertRomToDecButton, &QPushButton::clicked, this, &MainWindow::ConvertRomanToDecimalSlot);
+  connect(ui->convertDecToRomButton, &QPushButton::clicked,     this, &MainWindow::ConvertDecimalToRomanSlot);
+  connect(ui->convertRomToDecButton, &QPushButton::clicked,     this, &MainWindow::ConvertRomanToDecimalSlot);
+  connect(ui->decimalNumberLineEdit, &QLineEdit::returnPressed, this, &MainWindow::ConvertDecimalToRomanSlot);
+  connect(ui->romanNumberLineEdit,   &QLineEdit::returnPressed, this, &MainWindow::ConvertRomanToDecimalSlot);
 }
 
 MainWindow::~MainWindow(void)

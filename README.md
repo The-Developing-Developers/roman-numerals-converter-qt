@@ -7,6 +7,7 @@
   - [Version 1.1.0](#version-110)
   - [Version 2.0.0](#version-200)
   - [Version 2.1.0](#version-210)
+  - [Version 2.2.0](#version-220)
 
 
 # Description
@@ -36,4 +37,8 @@ In this version the backend no longer uses the C++ standard library, but only Qt
 ## Version 2.1.0
 
 The conversion algorithm has been improved with respect to version 2.0.0, replacing the `QMap`s with a single `QVector` of `QPair`s.
+
+## Version 2.2.0
+
+Adds the possibility to start the conversion by pressing the `ENTER` key.
 
