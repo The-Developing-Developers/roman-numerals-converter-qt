@@ -5,24 +5,28 @@ project(RomanNumeralsConverter VERSION 2.5.0 LANGUAGES CXX)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
+set(CMAKE_AUTOUIC_SEARCH_PATHS
+  ${CMAKE_SOURCE_DIR}/ui
+)
+
 set(CUSTOM_PROJECT_SOURCE_DIR
-  ${CMAKE_CURRENT_SOURCE_DIR}/src
+  ${CMAKE_SOURCE_DIR}/src
 )
 
 list(APPEND PROJECT_SOURCE_FILES
   ${CUSTOM_PROJECT_SOURCE_DIR}/main.cpp
   ${CUSTOM_PROJECT_SOURCE_DIR}/mainwindow.cpp
   ${CUSTOM_PROJECT_SOURCE_DIR}/mainwindow.h
-  ${CUSTOM_PROJECT_SOURCE_DIR}/mainwindow.ui
   ${CUSTOM_PROJECT_SOURCE_DIR}/romannumeralsconverter.h
   ${CUSTOM_PROJECT_SOURCE_DIR}/romannumeralsconverter.cpp
+
+  ${CMAKE_AUTOUIC_SEARCH_PATHS}/mainwindow.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -33,7 +37,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
+#                 ${CMAKE_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
   if(ANDROID)
@@ -41,7 +45,7 @@ else()
       ${PROJECT_SOURCE_FILES}
     )
 # Define properties for Android with Qt 5 after find_package() calls as:
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
+#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_SOURCE_DIR}/android")
   else()
     add_executable(${PROJECT_NAME}
       ${PROJECT_SOURCE_FILES}
